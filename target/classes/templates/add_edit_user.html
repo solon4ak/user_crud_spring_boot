@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group col-md-8">
                             <label for="email" class="col-form-label">Email</label>
-                            <input type="text" th:field="*{email}" class="form-control"
+                            <input type="email" th:field="*{email}" class="form-control"
                                    id="email" placeholder="Email Id" required />
                         </div>
                         <div class="form-group col-md-8">
@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-group col-md-8">
                             <label for="roles">Roles</label>
-                            <select th:field="*{roles}" multiple class="form-control" id="roles">
+                            <select th:field="*{roles}" multiple class="form-control" id="roles" required>
                                 <option th:each="role : ${user_roles}"
                                 th:value="${role.id}" th:text="${role.name}">Role</option>
                             </select>
@@ -78,7 +78,7 @@
         </div>
     </div>
     <div class="container my-5">
-        <span sec:authorize="isAuthenticated()">| Logged user: <span sec:authentication="name"></span> |
+        <span sec:authorize="isAuthenticated()">Logged user: <span sec:authentication="name"></span> |
                 Roles: <span sec:authentication="principal.authorities"></span> |
                 <a th:href="@{/logout}">Sign Out</a>
     </span>
