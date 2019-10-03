@@ -1,5 +1,6 @@
 package ru.solon4ak.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,13 @@ import java.util.logging.Logger;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private Logger log = Logger.getLogger(SecurityConfiguration.class.getName());
+
+    private AccessDeniedHandler accessDeniedHandler;
+
+    @Autowired
+    public void setAccessDeniedHandler(AccessDeniedHandler accessDeniedHandler) {
+        this.accessDeniedHandler = accessDeniedHandler;
+    }
 
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
@@ -66,6 +74,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .logoutSuccessUrl("/login")
                 .invalidateHttpSession(true)
+
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
 
                 .and()
                 .csrf().disable();
