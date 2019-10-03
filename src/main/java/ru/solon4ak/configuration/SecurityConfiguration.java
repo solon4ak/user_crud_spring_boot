@@ -67,6 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .formLogin()
+                .loginPage("/login")
                 .successHandler(myAuthenticationSuccessHandler())
 
                 .and()
