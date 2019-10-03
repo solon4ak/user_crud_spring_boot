@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>View User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+<div class="container my-5">
+    <h3>View User</h3>
+
+    <div class="card">
+        <table class="table" th:object="${user}">
+            <tbody>
+            <tr>
+                <th scope="row">Id</th>
+                <td th:text="*{id}"></td>
+            </tr>
+            <tr>
+                <th scope="row">Username</th>
+                <td th:text="*{username}"></td>
+            </tr>
+            <tr>
+                <th scope="row">First name</th>
+                <td th:text="*{firstName}"></td>
+            </tr>
+            <tr>
+                <th scope="row">Last name</th>
+                <td th:text="*{lastName}"></td>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <td th:text="*{email}"></td>
+            </tr>
+            <tr>
+                <th scope="row">Address</th>
+                <td th:text="*{address}"></td>
+            </tr>
+            <tr>
+                <th scope="row">Phone</th>
+                <td th:text="*{phoneNumber}"></td>
+            </tr>
+            <tr>
+                <th scope="row">Birthday</th>
+                <td th:text="${#calendars.format(user.birthDate, 'dd-MMM-yyyy')}"></td>
+            </tr>
+            <tr>
+                <th scope="row">Roles</th>
+                <td>
+                    <th:block th:each="role : ${user.roles}">
+                        <span th:text="${role.name.toLowerCase()}"></span>
+                        <br/>
+                    </th:block>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="my-3" sec:authorize="hasRole('ADMIN')">
+        <a href="/admin/list" class="card-link">Back to list</a>
+    </div>
+    <div class="container my-5">
+        <span sec:authorize="isAuthenticated()">| Logged user: <span sec:authentication="name"></span> |
+                Roles: <span sec:authentication="principal.authorities"></span> |
+                <a th:href="@{/logout}">Sign Out</a>
+    </span>
+    </div>
+
+</div>
+   
+</body>
+</html>

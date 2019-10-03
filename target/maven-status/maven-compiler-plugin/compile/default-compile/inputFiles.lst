@@ -1,0 +1,17 @@
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\Application.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\service\RoleService.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\service\UserService.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\repository\UserRepository.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\service\UserDetailServiceImpl.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\service\DBInit.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\exceptions\RecordNotFoundException.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\controller\AdminController.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\service\UserServiceImpl.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\configuration\SecurityConfiguration.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\service\RoleServiceImpl.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\configuration\SecurityWebApplicationInitializer.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\controller\UserController.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\model\User.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\configuration\UrlAuthenticationSuccessHandler.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\model\Role.java
+C:\Users\solon4ak\Documents\examples\spring-security-user-details-service-example\spring-security-user-details-service-example\user_crud_spring_boot\src\main\java\ru\solon4ak\repository\RoleRepository.java

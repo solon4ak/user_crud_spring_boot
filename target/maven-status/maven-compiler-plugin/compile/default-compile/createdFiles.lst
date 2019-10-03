@@ -1,0 +1,17 @@
+ru\solon4ak\controller\AdminController.class
+ru\solon4ak\repository\UserRepository.class
+ru\solon4ak\repository\RoleRepository.class
+ru\solon4ak\configuration\UrlAuthenticationSuccessHandler.class
+ru\solon4ak\service\DBInit.class
+ru\solon4ak\model\User.class
+ru\solon4ak\service\RoleService.class
+ru\solon4ak\service\UserDetailServiceImpl.class
+ru\solon4ak\service\UserServiceImpl.class
+ru\solon4ak\service\RoleServiceImpl.class
+ru\solon4ak\configuration\SecurityConfiguration.class
+ru\solon4ak\model\Role.class
+ru\solon4ak\Application.class
+ru\solon4ak\exceptions\RecordNotFoundException.class
+ru\solon4ak\controller\UserController.class
+ru\solon4ak\service\UserService.class
+ru\solon4ak\configuration\SecurityWebApplicationInitializer.class
