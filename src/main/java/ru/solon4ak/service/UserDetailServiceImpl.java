@@ -27,7 +27,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
             User user = userService.findByName(username);
             builder = org.springframework.security.core.userdetails.User.withUsername(username);
             builder.password(user.getPassword());
-
             builder.roles(userService.getUserRoles(user));
             return builder.build();
         } catch (RecordNotFoundException e) {

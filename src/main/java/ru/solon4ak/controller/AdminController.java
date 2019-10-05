@@ -3,25 +3,17 @@ package ru.solon4ak.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.RedirectView;
 import ru.solon4ak.exceptions.RecordNotFoundException;
-import ru.solon4ak.model.Role;
 import ru.solon4ak.model.User;
 import ru.solon4ak.service.RoleService;
 import ru.solon4ak.service.UserService;
 
-import java.security.Principal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("admin")
@@ -74,10 +66,10 @@ public class AdminController {
         return "redirect:/admin/list";
     }
 
-    @GetMapping("view/{userId}")
+    @GetMapping("view/{user}")
     public String viewUserById(Map<String, Object> model,
-                               @PathVariable long userId) throws RecordNotFoundException {
-        User user = userService.findUserById(userId);
+                               @PathVariable User user) throws RecordNotFoundException {
+//        User user = userService.findUserById(userId);
         model.put("user", user);
         return "view_user";
     }
