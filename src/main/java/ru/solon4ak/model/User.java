@@ -1,5 +1,8 @@
 package ru.solon4ak.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,31 +18,40 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = -8706689714326132798L;
 
+    @JsonView(Views.IgnorePassword.class)
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonView(Views.IgnorePassword.class)
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @JsonView(Views.IgnorePassword.class)
     @Column(name = "last_name")
     private String lastName;
 
+    @JsonView(Views.IgnorePassword.class)
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @JsonView(Views.IgnorePassword.class)
     @Column(name = "address")
     private String address;
 
+    @JsonView(Views.IgnorePassword.class)
     @Column(name = "phone_number")
     private String phoneNumber;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "birth_date", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonView(Views.IgnorePassword.class)
     private Date birthDate;
 
+    @JsonView(Views.IgnorePassword.class)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
@@ -48,9 +60,11 @@ public class User implements Serializable {
     )
     private Set<Role> roles = new HashSet<>();
 
+    @JsonView(Views.IgnorePassword.class)
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
+    @JsonView(Views.WithPassword.class)
     @Column(name = "password", nullable = false)
     private String password;
 

@@ -1,5 +1,7 @@
 package ru.solon4ak.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,9 +15,11 @@ public class Role implements Serializable {
     @Id
     @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(Views.IgnorePassword.class)
     private Long id;
 
     @Column(name = "role", nullable = false, unique = true)
+    @JsonView(Views.IgnorePassword.class)
     private String name;
 
     public Role() {

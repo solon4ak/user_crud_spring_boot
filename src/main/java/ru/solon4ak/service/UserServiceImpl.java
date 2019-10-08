@@ -39,15 +39,6 @@ public class UserServiceImpl implements UserService {
         Optional<User> userToUpdate = userRepository.findById(user.getId());
         if (userToUpdate.isPresent()) {
             User aUser = userToUpdate.get();
-//            aUser.setPassword(user.getPassword());
-//            aUser.setFirstName(user.getFirstName());
-//            aUser.setLastName(user.getLastName());
-//            aUser.setEmail(user.getEmail());
-//            aUser.setAddress(user.getAddress());
-//            aUser.setBirthDate(user.getBirthDate());
-//            aUser.setPhoneNumber(user.getPhoneNumber());
-//            aUser.setRoles(user.getRoles());
-
             return userRepository.save(aUser);
         } else {
             throw new RecordNotFoundException("Can't find user with specified id");
