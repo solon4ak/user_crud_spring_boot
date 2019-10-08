@@ -1,16 +1,15 @@
 package ru.solon4ak.controller;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ru.solon4ak.exceptions.RecordNotFoundException;
 import ru.solon4ak.model.User;
-import ru.solon4ak.service.RoleService;
 import ru.solon4ak.service.UserService;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("admin/user")
@@ -54,33 +53,32 @@ public class AdminController {
 //    }
 
     @PostMapping
-    public List<User> createUser(@RequestBody User user) {
+    public User createUser(@RequestBody User user) {
         String password = user.getPassword();
         user.setPassword(encoder.encode(password));
-        userService.create(user);
-        return userService.listUsers();
+        return userService.create(user);
     }
 
-    @PutMapping
-    public List<User> updateUser(@RequestBody User user)
-            throws RecordNotFoundException {
+    @PutMapping("{id}")
+    public User updateUser(
+            @PathVariable("id") User userToUpdate,
+            @RequestBody User user) throws RecordNotFoundException {
+        BeanUtils.copyProperties(user, userToUpdate, "id", "password");
         String password = user.getPassword();
-        user.setPassword(encoder.encode(password));
-        userService.update(user);
-        return userService.listUsers();
+        userToUpdate.setPassword(encoder.encode(password));
+        return userService.create(userToUpdate);
     }
 
     @DeleteMapping("{id}")
-    public List<User> deleteEmployeeById(@PathVariable Long id)
+    public void deleteEmployeeById(@PathVariable("id") User user)
             throws RecordNotFoundException {
-        userService.deleteUserById(id);
-        return userService.listUsers();
+        userService.deleteUser(user);
     }
 
     @GetMapping("{id}")
-    public User viewUserById(@PathVariable Long id)
+    public User viewUserById(@PathVariable("id") User user)
             throws RecordNotFoundException {
-        return userService.findUserById(id);
+        return user;
     }
 
 }

@@ -12,6 +12,6 @@ public interface UserService {
     User update(User user) throws RecordNotFoundException;
     User findUserById(Long id) throws RecordNotFoundException;
     User findByName(String username) throws RecordNotFoundException;
-    void deleteUserById(Long id) throws RecordNotFoundException;
+    void deleteUser(User user) throws RecordNotFoundException;
     String[] getUserRoles(User user);
 }

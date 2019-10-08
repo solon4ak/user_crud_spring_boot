@@ -36,18 +36,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(User user) throws RecordNotFoundException {
-
         Optional<User> userToUpdate = userRepository.findById(user.getId());
         if (userToUpdate.isPresent()) {
             User aUser = userToUpdate.get();
-            aUser.setPassword(user.getPassword());
-            aUser.setFirstName(user.getFirstName());
-            aUser.setLastName(user.getLastName());
-            aUser.setEmail(user.getEmail());
-            aUser.setAddress(user.getAddress());
-            aUser.setBirthDate(user.getBirthDate());
-            aUser.setPhoneNumber(user.getPhoneNumber());
-            aUser.setRoles(user.getRoles());
+//            aUser.setPassword(user.getPassword());
+//            aUser.setFirstName(user.getFirstName());
+//            aUser.setLastName(user.getLastName());
+//            aUser.setEmail(user.getEmail());
+//            aUser.setAddress(user.getAddress());
+//            aUser.setBirthDate(user.getBirthDate());
+//            aUser.setPhoneNumber(user.getPhoneNumber());
+//            aUser.setRoles(user.getRoles());
 
             return userRepository.save(aUser);
         } else {
@@ -83,11 +82,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserById(Long id) throws RecordNotFoundException {
+    public void deleteUser(User user) throws RecordNotFoundException {
 
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            userRepository.delete(user.get());
+        Optional<User> aUser = userRepository.findById(user.getId());
+        if (aUser.isPresent()) {
+            userRepository.delete(aUser.get());
         } else {
             throw new RecordNotFoundException("No user record exist for given id");
         }
