@@ -2,76 +2,85 @@ package ru.solon4ak.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.solon4ak.exceptions.RecordNotFoundException;
 import ru.solon4ak.model.User;
 import ru.solon4ak.service.RoleService;
 import ru.solon4ak.service.UserService;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Controller
-@RequestMapping("admin")
+@RestController
+@RequestMapping("admin/user")
 public class AdminController {
 
     private final UserService userService;
 
-    private final RoleService roleService;
+//    private final RoleService roleService;
 
     private final PasswordEncoder encoder;
 
+//    @Autowired
+//    public AdminController(UserService userService, RoleService roleService, PasswordEncoder encoder) {
+//        this.userService = userService;
+//        this.roleService = roleService;
+//        this.encoder = encoder;
+//    }
+
     @Autowired
-    public AdminController(UserService userService, RoleService roleService, PasswordEncoder encoder) {
+    public AdminController(UserService userService, PasswordEncoder encoder) {
         this.userService = userService;
-        this.roleService = roleService;
         this.encoder = encoder;
     }
 
-    @GetMapping("list")
-    public String getAllUsers(Map<String, Object> model) {
-        model.put("users", userService.listUsers());
-        return "list_users";
+    @GetMapping
+    public List<User> getAllUsers(Map<String, Object> model) {
+        return userService.listUsers();
     }
 
-    @GetMapping({"edit", "edit/{id}"})
-    public String editUserById(Map<String, Object> model, @PathVariable("id") Optional<Long> id)
-            throws RecordNotFoundException {
-        if (id.isPresent()) {
-            User user = userService.findUserById(id.get());
-            model.put("user", user);
-        } else {
-            model.put("user", new User());
-        }
-        model.put("user_roles", roleService.getAllRoles());
-        return "add_edit_user";
-    }
+//    @GetMapping({"edit", "edit/{id}"})
+//    public String editUserById(Map<String, Object> model, @PathVariable("id") Optional<Long> id)
+//            throws RecordNotFoundException {
+//        if (id.isPresent()) {
+//            User user = userService.findUserById(id.get());
+//            model.put("user", user);
+//        } else {
+//            model.put("user", new User());
+//        }
+//        model.put("user_roles", roleService.getAllRoles());
+//        return "add_edit_user";
+//    }
 
-    @PostMapping("add")
-    public String createOrUpdateUser(User user) {
+    @PostMapping
+    public List<User> createUser(@RequestBody User user) {
         String password = user.getPassword();
         user.setPassword(encoder.encode(password));
-        userService.createOrUpdateUser(user);
-        return "redirect:/admin/list";
+        userService.create(user);
+        return userService.listUsers();
     }
 
-    @GetMapping("delete/{id}")
-    public String deleteEmployeeById(@PathVariable("id") Long id)
+    @PutMapping
+    public List<User> updateUser(@RequestBody User user)
+            throws RecordNotFoundException {
+        String password = user.getPassword();
+        user.setPassword(encoder.encode(password));
+        userService.update(user);
+        return userService.listUsers();
+    }
+
+    @DeleteMapping("{id}")
+    public List<User> deleteEmployeeById(@PathVariable Long id)
             throws RecordNotFoundException {
         userService.deleteUserById(id);
-        return "redirect:/admin/list";
+        return userService.listUsers();
     }
 
-    @GetMapping("view/{user}")
-    public String viewUserById(Map<String, Object> model,
-                               @PathVariable User user) throws RecordNotFoundException {
-//        User user = userService.findUserById(userId);
-        model.put("user", user);
-        return "view_user";
+    @GetMapping("{id}")
+    public User viewUserById(@PathVariable Long id)
+            throws RecordNotFoundException {
+        return userService.findUserById(id);
     }
 
 }

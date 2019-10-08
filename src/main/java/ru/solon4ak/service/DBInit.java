@@ -45,7 +45,7 @@ public class DBInit {
                 encoder.encode("marcy")
         );
         user.addRole(adminRole);
-        userService.createOrUpdateUser(user);
+        userService.create(user);
 
         user = new User(
                 "Henry",
@@ -58,7 +58,7 @@ public class DBInit {
                 encoder.encode("henry")
         );
         user.addRole(userRole);
-        userService.createOrUpdateUser(user);
+        userService.create(user);
 
         user = new User(
                 "Antony",
@@ -71,6 +71,6 @@ public class DBInit {
                 encoder.encode("ant")
         );
         user.addRole(userRole);
-        userService.createOrUpdateUser(user);
+        userService.create(user);
     }
 }
