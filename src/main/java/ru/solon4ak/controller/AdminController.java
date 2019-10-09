@@ -1,12 +1,10 @@
 package ru.solon4ak.controller;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.solon4ak.exceptions.RecordNotFoundException;
 import ru.solon4ak.model.User;
 import ru.solon4ak.service.RoleService;
@@ -52,24 +50,30 @@ public class AdminController {
     }
 
     @PostMapping("add")
-    public String createOrUpdateUser(User user) {
+    public String createOrUpdateUser(@RequestParam User id, User user)
+            throws RecordNotFoundException {
         String password = user.getPassword();
-        user.setPassword(encoder.encode(password));
-        userService.createOrUpdateUser(user);
+        if (id == null) {
+            user.setPassword(encoder.encode(password));
+            userService.create(user);
+        } else {
+            BeanUtils.copyProperties(user, id, "id", "password");
+            id.setPassword(encoder.encode(password));
+            userService.update(user);
+        }
         return "redirect:/admin/list";
     }
 
     @GetMapping("delete/{id}")
-    public String deleteEmployeeById(@PathVariable("id") Long id)
+    public String deleteEmployeeById(@PathVariable("id") User user)
             throws RecordNotFoundException {
-        userService.deleteUserById(id);
+        userService.deleteUser(user);
         return "redirect:/admin/list";
     }
 
-    @GetMapping("view/{user}")
+    @GetMapping("view/{id}")
     public String viewUserById(Map<String, Object> model,
-                               @PathVariable User user) throws RecordNotFoundException {
-//        User user = userService.findUserById(userId);
+                               @PathVariable("id") User user) {
         model.put("user", user);
         return "view_user";
     }

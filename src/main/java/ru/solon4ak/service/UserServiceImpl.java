@@ -35,27 +35,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createOrUpdateUser(User user) {
-        if (user.getId() == null) {
-            return userRepository.save(user);
+    public User update(User user) throws RecordNotFoundException {
+        Optional<User> userToUpdate = userRepository.findById(user.getId());
+        if (userToUpdate.isPresent()) {
+            User aUser = userToUpdate.get();
+            return userRepository.save(aUser);
         } else {
-            Optional<User> userToUpdate = userRepository.findById(user.getId());
-            if (userToUpdate.isPresent()) {
-                User aUser = userToUpdate.get();
-                aUser.setPassword(user.getPassword());
-                aUser.setFirstName(user.getFirstName());
-                aUser.setLastName(user.getLastName());
-                aUser.setEmail(user.getEmail());
-                aUser.setAddress(user.getAddress());
-                aUser.setBirthDate(user.getBirthDate());
-                aUser.setPhoneNumber(user.getPhoneNumber());
-                aUser.setRoles(user.getRoles());
-
-                return userRepository.save(aUser);
-            } else {
-                return userRepository.save(user);
-            }
+            throw new RecordNotFoundException("Can't find user with specified id");
         }
+    }
+
+    @Override
+    public User create(User user) {
+        return userRepository.save(user);
     }
 
     @Override
@@ -81,11 +73,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserById(Long id) throws RecordNotFoundException {
-
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            userRepository.delete(user.get());
+    public void deleteUser(User user) throws RecordNotFoundException {
+        Optional<User> aUser = userRepository.findById(user.getId());
+        if (aUser.isPresent()) {
+            userRepository.delete(aUser.get());
         } else {
             throw new RecordNotFoundException("No user record exist for given id");
         }
