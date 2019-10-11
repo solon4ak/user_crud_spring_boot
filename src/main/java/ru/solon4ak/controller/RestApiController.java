@@ -5,28 +5,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ru.solon4ak.exceptions.RecordNotFoundException;
+import ru.solon4ak.model.Role;
 import ru.solon4ak.model.User;
+import ru.solon4ak.service.RoleService;
 import ru.solon4ak.service.UserService;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("rest")
 public class RestApiController {
     private final UserService userService;
     private final PasswordEncoder encoder;
-
+    private final RoleService roleService;
 
     @Autowired
-    public RestApiController(UserService userService, PasswordEncoder encoder) {
+    public RestApiController(UserService userService, RoleService roleService, PasswordEncoder encoder) {
         this.userService = userService;
+        this.roleService = roleService;
         this.encoder = encoder;
     }
 
     @GetMapping
-    public List<User> getAllUsers(Map<String, Object> model) {
+    public List<User> getAllUsers() {
         return userService.listUsers();
+    }
+
+    @GetMapping("roles")
+    public List<Role> getAllUserRoles() {
+        return roleService.getAllRoles();
     }
 
     @PostMapping
