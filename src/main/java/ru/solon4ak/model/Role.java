@@ -12,13 +12,11 @@ public class Role implements Serializable {
 
     private static final long serialVersionUID = -8706689714326132798L;
 
-    @JsonView(Views.IgnorePassword.class)
     @Id
     @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonView(Views.IgnorePassword.class)
     @Column(name = "role", nullable = false, unique = true)
     private String name;
 
