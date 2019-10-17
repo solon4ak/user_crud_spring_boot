@@ -37,7 +37,7 @@ public class DBInit {
         User user = new User(
                 "Marcy",
                 "Gray",
-                "marcy@",
+                "marcy@m",
                 "",
                 "",
                 new Date(new GregorianCalendar(1977, Calendar.OCTOBER, 6).getTime().getTime()),
@@ -50,7 +50,7 @@ public class DBInit {
         user = new User(
                 "Henry",
                 "Moore",
-                "henry@",
+                "henry@h",
                 "",
                 "",
                 new Date(new GregorianCalendar(1998, Calendar.JUNE, 25).getTime().getTime()),
@@ -63,7 +63,7 @@ public class DBInit {
         user = new User(
                 "Antony",
                 "Goose",
-                "tony@",
+                "tony@t",
                 "",
                 "",
                 new Date(new GregorianCalendar(1998, Calendar.JUNE, 25).getTime().getTime()),
