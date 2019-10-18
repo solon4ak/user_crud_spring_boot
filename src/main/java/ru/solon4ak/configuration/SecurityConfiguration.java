@@ -45,8 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private OAuth2ClientContext oAuth2ClientContext;
     private AccessDeniedHandler accessDeniedHandler;
-    private UserService userService;
-    private RoleService roleService;
+//    private UserService userService;
+//    private RoleService roleService;
 
     @Autowired
     public void setoAuth2ClientContext(
@@ -59,15 +59,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.accessDeniedHandler = accessDeniedHandler;
     }
 
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setRoleService(RoleService roleService) {
-        this.roleService = roleService;
-    }
+//    @Autowired
+//    public void setUserService(UserService userService) {
+//        this.userService = userService;
+//    }
+//
+//    @Autowired
+//    public void setRoleService(RoleService roleService) {
+//        this.roleService = roleService;
+//    }
 
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
@@ -106,28 +106,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return registration;
     }
 
-    @Bean
-    public PrincipalExtractor principalExtractor() {
-        return map -> {
-            String email = (String) map.get("email");
-            try {
-                return userService.findByName(email);
-            } catch (RecordNotFoundException e) {
-                log.log(Level.WARNING, "Authentication exception. Can't find user.", e);
-                User user = new User();
-                user.setEmail((String) map.get("email"));
-                user.setFirstName((String) map.get("given_name"));
-                user.setLastName((String) map.get("family_name"));
-                user.setUsername((String) map.get("name"));
-                user.addRole(roleService.getAllRoles().get(1));
-                return userService.create(user);
-            }
-        };
-    }
+//    @Bean
+//    public PrincipalExtractor principalExtractor() {
+//        return map -> {
+//            String email = (String) map.get("email");
+//            try {
+//                return userService.findByName(email);
+//            } catch (RecordNotFoundException e) {
+//                log.log(Level.WARNING, "Authentication exception. Can't find user.", e);
+//                User user = new User();
+//                user.setEmail((String) map.get("email"));
+//                user.setFirstName((String) map.get("given_name"));
+//                user.setLastName((String) map.get("family_name"));
+//                user.setUsername((String) map.get("name"));
+//                user.addRole(roleService.getAllRoles().get(1));
+//                return userService.create(user);
+//            }
+//        };
+//    }
 
     private Filter ssoFilter() {
         OAuth2ClientAuthenticationProcessingFilter googleFilter =
-                new OAuth2ClientAuthenticationProcessingFilter("/login");
+                new OAuth2ClientAuthenticationProcessingFilter("/login/google");
         OAuth2RestTemplate googleTemplate = new OAuth2RestTemplate(google(), oAuth2ClientContext);
         googleFilter.setRestTemplate(googleTemplate);
         UserInfoTokenServices tokenServices =

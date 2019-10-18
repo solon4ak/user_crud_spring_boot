@@ -14,7 +14,7 @@
             это сэкономит вам нервы(проблемы с кодировками, фильтры) и даст бесценный опыт в будущем -->
 <!--            © 2018 leodev.ru-->
             <span sec:authorize="isAuthenticated()">Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
+<!--                Roles: <span sec:authentication="principal.authorities"></span> |-->
                 <a th:href="@{/logout}">Sign Out</a>
             </span>
 
