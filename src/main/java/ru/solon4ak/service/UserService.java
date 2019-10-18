@@ -12,6 +12,7 @@ public interface UserService {
     User update(User user) throws RecordNotFoundException;
     User findUserById(Long id) throws RecordNotFoundException;
     User findByName(String username) throws RecordNotFoundException;
+//    User findUserByEmail(String email) throws RecordNotFoundException;
     void deleteUser(User user) throws RecordNotFoundException;
     String[] getUserRoles(User user);
 

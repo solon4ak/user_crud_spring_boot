@@ -64,11 +64,16 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public User findByName(String username) throws RecordNotFoundException {
-        Optional<User> user = userRepository.findUserByUsername(username);
-        if (user.isPresent()) {
-            return user.get();
+
+        Optional<User> userByUsername = userRepository.findUserByUsername(username);
+        Optional<User> userByEmail = userRepository.findUserByEmail(username);
+
+        if (userByUsername.isPresent()) {
+            return userByUsername.get();
+        } else if(userByEmail.isPresent()) {
+            return userByEmail.get();
         } else {
-            throw new RecordNotFoundException("No user record for given username");
+            throw new RecordNotFoundException("No user record for given username or email");
         }
     }
 

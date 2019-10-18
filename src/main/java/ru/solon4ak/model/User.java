@@ -21,7 +21,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
@@ -37,7 +37,7 @@ public class User implements Serializable {
     private String phoneNumber;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "birth_date", nullable = false)
+    @Column(name = "birth_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date birthDate;
@@ -50,10 +50,10 @@ public class User implements Serializable {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @Column(name = "username", nullable = false, unique = true)
+    @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     public User() {
