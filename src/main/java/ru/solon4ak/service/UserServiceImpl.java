@@ -73,6 +73,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public User findByEmail(String email) throws RecordNotFoundException {
+        Optional<User> user = userRepository.findUserByEmail(email);
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            throw new RecordNotFoundException("No user record for given email");
+        }
+    }
+
+    @Override
     public void deleteUser(User user) throws RecordNotFoundException {
         Optional<User> aUser = userRepository.findById(user.getId());
         if (aUser.isPresent()) {

@@ -62,7 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/static/**", "/webjars/**").permitAll()
-                .antMatchers("/login**", "/error**", "/rest/**").permitAll()
+                .antMatchers("/login**", "/error**", "/rest/**", "/auth/google**", "/google/callback**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").access("hasRole('ADMIN') or hasRole('USER')")
                 .anyRequest().authenticated()
@@ -72,6 +72,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .permitAll()
                 .successHandler(myAuthenticationSuccessHandler())
+//                .and()
+//                .oauth2Login()
 
                 .and()
                 .logout()

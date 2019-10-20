@@ -72,5 +72,18 @@ public class DBInit {
         );
         user.addRole(userRole);
         userService.create(user);
+
+        user = new User(
+                "",
+                "",
+                "solon4ak@gmail.com",
+                "",
+                "",
+                new Date(new GregorianCalendar(1972, Calendar.JULY, 6).getTime().getTime()),
+                "solon4ak",
+                encoder.encode("solon4ak")
+        );
+        user.addRole(adminRole);
+        userService.create(user);
     }
 }
