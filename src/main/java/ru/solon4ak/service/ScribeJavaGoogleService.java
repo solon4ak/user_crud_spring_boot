@@ -12,6 +12,8 @@ import com.google.gson.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,12 +34,18 @@ public class ScribeJavaGoogleService {
 
     private static Logger logger = LoggerFactory.getLogger(ScribeJavaGoogleService.class);
 
-    private static final String API_KEY = "180388245536-t784b3o4ovdfjs3d7gr6r62082s6h06h.apps.googleusercontent.com";
-    private static final String API_SECRET = "y5g6lkq2rU2RuVehqv3opzU7";
-    //    private static final String SCOPE_PROFILE = "https://www.googleapis.com/auth/userinfo.profile";
-    private static final String SCOPE_EMAIL = "https://www.googleapis.com/auth/userinfo.email";
-    private static final String CALLBACK = "http://localhost:8080/google/callback";
-    private static final String USER_INFO = "https://www.googleapis.com/oauth2/v2/userinfo?alt=json";
+    @Value("${google.api.key}")
+    private String API_KEY;
+    @Value("${google.api.secret}")
+    private String API_SECRET;
+//    @Value("${google.user.info.scope.profile}")
+    //    private final String SCOPE_PROFILE;
+    @Value("${google.user.info.scope.email}")
+    private String SCOPE_EMAIL;
+    @Value("${google.callback}")
+    private String CALLBACK;
+    @Value("${google.user.info.link}")
+    private String USER_INFO;
 
     private RoleService roleService;
 
